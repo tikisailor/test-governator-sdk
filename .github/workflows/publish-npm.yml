@@ -1,0 +1,26 @@
+name: Publish SDK
+run-name: ${{ github.actor }} is publishing a new SDK on npm 🚀
+on: 
+  push:
+    branches:
+    - master
+jobs:
+  Publish-To-Npm:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job running on ${{ runner.os }} on branch ${{ github.ref }} and repository ${{ github.repository }}"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+           node-version: 16.13.0
+           registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Publish package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm run build
+          npm publish
+      - run: echo "Job completed with exit status ${{ job.status }}."   
