@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is publishing a new SDK on npm 🚀
 on: 
   push:
     branches:
-    - master
+    - main
 jobs:
   Publish-To-Npm:
     runs-on: ubuntu-latest
