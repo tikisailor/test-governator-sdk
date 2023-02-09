@@ -21,6 +21,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          npm whoami
           npm run build
           npm publish
       - run: echo "Job completed with exit status ${{ job.status }}."   
